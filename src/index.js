@@ -47,9 +47,12 @@ export default class JSONSchemaView {
        this.schema.oneof ||
        this.schema.allOf);
 
-    // Determine if a schema is a primitive
-    this.isPrimitive = !this.isAny && !this.isArray && !this.isObject;
+    // Determine if the schema is a ref
+    this.isRef = '$ref' in this.schema;
 
+    // Determine if a schema is a primitive
+    this.isPrimitive = !this.isAny && !this.isArray && !this.isObject && !this.isRef;
+ 
     //
     this.showToggle = this.schema.description ||
       this.schema.title ||
@@ -159,6 +162,13 @@ export default class JSONSchemaView {
         </div>
       `}
 
+      <!-- Ref -->
+      ${_if(this.isRef)`
+        <div class="primitive">
+            <a class="title">${'Ref'} </a>
+            <a class="type" href="${this.schema.$ref}">${this.schema.$ref}</a>
+        </div>
+      `}
 
       <!-- Array -->
       ${_if(this.isArray)`
@@ -191,7 +201,7 @@ export default class JSONSchemaView {
       `}
 
       <!-- Object -->
-      ${_if(!this.isPrimitive && !this.isArray && !this.isAny)`
+      ${_if(!this.isPrimitive && !this.isArray && !this.isAny && !this.isRef)`
         <div class="object">
           <a class="title"><span
             class="toggle-handle"></span>${this.schema.title || ''} <span

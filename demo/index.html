@@ -137,12 +137,20 @@ document.body.appendChild(view.render());</pre>
             description: 'Anything from objects to arrays!'
           }
         },
+
         {
           title: 'Simple',
           schema: {
             title: 'Name',
             description: 'A name',
             type: 'string'
+          }
+        },
+
+        {
+          title: 'Ref',
+          schema: {
+            $ref: '#/definitions/foo'
           }
         },
 
