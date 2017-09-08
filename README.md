@@ -43,6 +43,8 @@ This number indicates up to how many levels the rendered tree should expand. Set
 An object containing other options for construction the view. These are possible options:
 ###### `theme` (`string`)
 A theme defined in the CSS of this view. Possible values: `dark`. Note that the dark theme is just for making the text brighter so it looks good on dark backgrounds.
+###### `showRefs` (`boolean`)
+to show refs as is. By default, the refs aren't handled and an 'undefined' is rendered.
 
 ## Development
 Install `gulp` and run `gulp serve` to start the server that serves the development version of the project.
